@@ -1,0 +1,12 @@
+{
+  "name": "devops-aws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sonar": "sonar-scanner"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
