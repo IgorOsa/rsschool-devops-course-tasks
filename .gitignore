@@ -2,3 +2,8 @@
 
 # sonar files
 .scannerwork
+
+# terraform
+.terraform
+.terraform.*
+terraform.tfstate*
