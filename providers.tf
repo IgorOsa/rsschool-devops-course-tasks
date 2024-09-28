@@ -16,7 +16,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-central-1"
+  region = var.region
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
@@ -28,5 +28,5 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   thumbprint_list = ["d89e3bd43d5d909b47a18977aa9d5ce36cee184c"]
 
-  tags = local.tags
+  tags = var.tags
 }

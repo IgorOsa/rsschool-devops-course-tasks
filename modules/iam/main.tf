@@ -22,7 +22,7 @@ resource "aws_iam_role" "gharole" {
     ]
   })
 
-  tags = local.tags
+  tags = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "ec2_full_access" {
