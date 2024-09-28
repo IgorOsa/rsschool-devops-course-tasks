@@ -5,19 +5,25 @@ resource "aws_iam_role" "gharole" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action = "sts:AssumeRole"
         Effect = "Allow"
+        Action = "sts:AssumeRoleWithWebIdentity"
         Sid    = ""
-        Principal = {
-          Service = "ec2.amazonaws.com"
+        "Principal" = {
+          "Federated" = "arn:aws:iam::713881805304:oidc-provider/token.actions.githubusercontent.com"
+        },
+        "Condition" = {
+          "StringEquals" = {
+            "token.actions.githubusercontent.com:sub" = "repo:IgorOsa/rsschool-devops-course-tasks:ref:refs/heads/master"
+          },
+          "StringLike" = {
+            "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+          }
         }
       },
     ]
   })
 
-  tags = {
-    tag-key = "rsschool-devops-course"
-  }
+  tags = local.tags
 }
 
 resource "aws_iam_role_policy_attachment" "ec2_full_access" {
