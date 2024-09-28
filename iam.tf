@@ -7,15 +7,14 @@ resource "aws_iam_role" "gharole" {
       {
         Effect = "Allow"
         Action = "sts:AssumeRoleWithWebIdentity"
-        Sid    = ""
         "Principal" = {
           "Federated" = "arn:aws:iam::713881805304:oidc-provider/token.actions.githubusercontent.com"
         },
         "Condition" = {
-          "StringEquals" = {
-            "token.actions.githubusercontent.com:sub" = "repo:IgorOsa/rsschool-devops-course-tasks:ref:refs/heads/master"
-          },
           "StringLike" = {
+            "token.actions.githubusercontent.com:sub" = "repo:IgorOsa/rsschool-devops-course-tasks:*"
+          },
+          "StringEquals" = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
         }
