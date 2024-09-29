@@ -50,4 +50,8 @@ If changes are 'OK', apply them with command:
 
 `terraform apply`
 
+### How to destroy resources
+
+Use `terraform destroy` to remove all resources from the cloud provide and save :dollar:.
+
 Happy coding!
