@@ -11,7 +11,6 @@ terraform {
     bucket  = "rss-devops-tfstate"
     key     = "state/terraform.tfstate"
     encrypt = true
-    # dynamodb_table = "rss-devops-tf-lockid"
   }
 }
 
