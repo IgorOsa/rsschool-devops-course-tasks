@@ -6,12 +6,12 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-env:
-  AWS_REGION: "eu-central-1"
-
 permissions:
   id-token: write
   contents: read
+
+env:
+  TF_VAR_aws_account_id: ${{secrets.AWS_ACCOUNT_ID}}
 
 jobs:
   sonarcloud:
@@ -55,9 +55,9 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
-          role-to-assume: arn:aws:iam::713881805304:role/GithubActionsRole
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubActionsRole
           role-session-name: terraform-plan-session
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
@@ -82,9 +82,9 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
-          role-to-assume: arn:aws:iam::713881805304:role/GithubActionsRole
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubActionsRole
           role-session-name: terraform-plan-session
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
