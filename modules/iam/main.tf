@@ -8,7 +8,7 @@ resource "aws_iam_role" "gharole" {
         Effect = "Allow"
         Action = "sts:AssumeRoleWithWebIdentity"
         "Principal" = {
-          "Federated" = "arn:aws:iam::713881805304:oidc-provider/token.actions.githubusercontent.com"
+          "Federated" = "arn:aws:iam::${var.aws_account_id}:oidc-provider/token.actions.githubusercontent.com"
         },
         "Condition" = {
           "StringLike" = {
