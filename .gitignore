@@ -7,4 +7,4 @@
 .terraform
 .terraform.*
 terraform.tfstate*
-local.tfvars
+terraform.tfvars
