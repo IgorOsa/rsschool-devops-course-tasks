@@ -61,6 +61,14 @@ resource "aws_security_group" "bastion_sg" {
     cidr_blocks = var.admin_access_cidr_blocks
   }
 
+  # New rule: Allow SSH from EC2 Instance Connect service IP addresses
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["3.120.181.40/29"] # Update this CIDR block based on your region
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
