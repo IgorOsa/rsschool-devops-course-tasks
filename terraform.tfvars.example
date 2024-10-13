@@ -1,0 +1,2 @@
+aws_account_id           = "your_account_id"
+admin_access_cidr_blocks = ["0.0.0.0/0"] # provide your list of IPs to allow access for
