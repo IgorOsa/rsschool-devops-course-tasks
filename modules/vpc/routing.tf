@@ -24,6 +24,11 @@ resource "aws_route_table_association" "public_subnet_2_association" {
 resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.vpc.id
 
+  route {
+    cidr_block           = "0.0.0.0/0"
+    network_interface_id = aws_network_interface.nat_eni.id
+  }
+
   tags = {
     Name = "Private route table"
   }

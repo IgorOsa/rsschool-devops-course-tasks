@@ -4,7 +4,6 @@ resource "aws_instance" "nat_instance" {
   associate_public_ip_address = false
   availability_zone           = var.availability_zones[0]
   hibernation                 = false
-  key_name                    = "my_secure_keypair"
   subnet_id                   = aws_subnet.public_subnet_1.id
   vpc_security_group_ids      = [aws_security_group.nat_sg.id]
   source_dest_check           = false
@@ -19,4 +18,18 @@ resource "aws_instance" "nat_instance" {
 
 output "nat_instance_public_ip" {
   value = aws_instance.nat_instance.public_ip
+}
+
+resource "aws_network_interface" "nat_eni" {
+  subnet_id       = aws_subnet.public_subnet_1.id
+  security_groups = [aws_security_group.nat_sg.id]
+
+  attachment {
+    instance     = aws_instance.nat_instance.id
+    device_index = 1
+  }
+
+  tags = {
+    Name = "NAT ENI"
+  }
 }
