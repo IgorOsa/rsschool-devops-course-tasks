@@ -20,6 +20,11 @@ variable "private_subnet_cidr_blocks" {
   default     = ["10.0.3.0/24", "10.0.4.0/24"]
 }
 
+variable "admin_access_cidr_blocks" {
+  description = "CIDR blocks for the admin access"
+  type        = list(string)
+}
+
 variable "availability_zones" {
   description = "Availability zones"
   type        = list(string)

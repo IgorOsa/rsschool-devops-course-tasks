@@ -15,3 +15,8 @@ variable "tags" {
     environment = "dev"
   }
 }
+
+variable "admin_access_cidr_blocks" {
+  description = "CIDR blocks for the admin access"
+  type        = list(string)
+}

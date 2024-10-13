@@ -5,9 +5,10 @@ module "iam" {
 }
 
 module "vpc" {
-  source         = "./modules/vpc"
-  tags           = var.tags
-  aws_account_id = var.aws_account_id
+  source                   = "./modules/vpc"
+  tags                     = var.tags
+  aws_account_id           = var.aws_account_id
+  admin_access_cidr_blocks = var.admin_access_cidr_blocks
 }
 
 # This module for saving TF states should be removed after all
