@@ -31,7 +31,6 @@ jobs:
   terraform-check:
     name: Terraform Format Check
     runs-on: ubuntu-latest
-
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
@@ -48,7 +47,6 @@ jobs:
     name: Terraform Plan
     runs-on: ubuntu-latest
     needs: terraform-check
-
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
@@ -75,7 +73,7 @@ jobs:
     name: Terraform Apply
     runs-on: ubuntu-latest
     needs: terraform-plan
-
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
