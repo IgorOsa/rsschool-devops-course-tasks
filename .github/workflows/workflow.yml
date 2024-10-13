@@ -12,6 +12,7 @@ permissions:
 
 env:
   TF_VAR_aws_account_id: ${{secrets.AWS_ACCOUNT_ID}}
+  TF_VAR_admin_access_cidr_blocks: ${{secrets.TF_VAR_ADMIN_ACCESS_CIDR_BLOCKS}}
 
 jobs:
   sonarcloud:
