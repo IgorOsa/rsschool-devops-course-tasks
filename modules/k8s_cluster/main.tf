@@ -7,6 +7,15 @@ resource "aws_instance" "k8s_master" {
   vpc_security_group_ids      = [aws_security_group.k8s_master_sg.id]
   key_name                    = "my_secure_keypair"
 
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo yum update -y 
+              sudo yum install -y curl 
+              sudo systemctl stop firewalld 
+              curl -sfL https://get.k3s.io | sh - 
+              sudo chmod 644 /etc/rancher/k3s/k3s.yaml 
+              EOF
+
   tags = {
     Name = "K8s Master"
   }
