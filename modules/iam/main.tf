@@ -8,7 +8,7 @@ resource "aws_iam_role" "gharole" {
         Effect = "Allow"
         Action = "sts:AssumeRoleWithWebIdentity"
         "Principal" = {
-          "Federated" = "arn:aws:iam::713881805304:oidc-provider/token.actions.githubusercontent.com"
+          "Federated" = "arn:aws:iam::${var.aws_account_id}:oidc-provider/token.actions.githubusercontent.com"
         },
         "Condition" = {
           "StringLike" = {
@@ -58,4 +58,29 @@ resource "aws_iam_role_policy_attachment" "sqs_full_access" {
 resource "aws_iam_role_policy_attachment" "eventbridge_full_access" {
   role       = aws_iam_role.gharole.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess"
+}
+
+resource "aws_iam_role_policy" "dynamodb_custom_role" {
+  name   = "DynamoDBTFCustomAccess"
+  role   = aws_iam_role.gharole.id
+  policy = <<EOF
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Action": [
+				"dynamodb:PutItem",
+				"dynamodb:GetItem",
+				"dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:DescribeContinuousBackups",
+        "dynamodb:DescribeTimeToLive",
+        "dynamodb:ListTagsOfResource"
+			],
+			"Effect": "Allow",
+			"Resource": "*"
+		}
+	]
+}
+EOF
 }

@@ -7,10 +7,11 @@ terraform {
   }
 
   backend "s3" {
-    region  = "eu-central-1"
-    bucket  = "rss-devops-tfstate"
-    key     = "state/terraform.tfstate"
-    encrypt = true
+    region         = "eu-central-1"
+    bucket         = "rss-devops-tfstate"
+    key            = "state/terraform.tfstate"
+    dynamodb_table = "rss-devops-tf-lockid"
+    encrypt        = true
   }
 }
 
